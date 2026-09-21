@@ -45,8 +45,6 @@ def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocup
 
 
 def inicializa_estado():
-    # Cria lista de listas, cada uma com 50 espaços em branco
-    # Você pode mudar esta lista, inclusive seu tamanho, à vontade
     mapa = [
         [' '] * 80,
         [' '] * 80,
@@ -87,6 +85,7 @@ def inicializa_estado():
     objetos = []
     objetos += gera_objetos(8, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
     objetos += gera_objetos(6, ESPINHO, MARROM_ESCURO, largura_mapa, altura_mapa, posicoes_ocupadas)
+
     
     return {
         'tela_atual': TELA_JOGO,

@@ -19,8 +19,8 @@ No nível básico você deve entender o código fornecido e implementar as segui
     - [ ] Mostrar quantidade de vidas (se o jogador tiver menos vidas do que o máximo, o restante deve ser mostrado como corações brancos - exemplo: 🧡🧡🧡🤍🤍);
     - [x] Mostrar mensagem.
 - [ ] Implementar a função `atualiza_estado`:
-    - [ ] Mover o jogador;
-    - [ ] Impedir o jogador de sair do mapa;
+    - [x] Mover o jogador;
+    - [x] Impedir o jogador de sair do mapa;
     - [ ] Ao colidir com um coração:
         - [ ] Remover o coração da lista de objetos;
         - [ ] Aumentar uma vida caso ainda não esteja no máximo;
