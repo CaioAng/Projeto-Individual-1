@@ -27,7 +27,7 @@ TELA_INVENTARIO = 2
 # Objetos
 # As constantes abaixo são os caracteres que representam cada objeto no mapa.
 # Você pode mudar os caracteres para o que preferir.
-JOGADOR = '@'
+JOGADOR = '𓁆'
 CORACAO = '❤'
 ESPINHO = '#'
 MONSTRO = '☠'

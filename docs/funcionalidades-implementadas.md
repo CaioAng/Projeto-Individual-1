@@ -13,11 +13,11 @@ No nível básico você deve entender o código fornecido e implementar as segui
     - [x] Devolver uma posição aleatória dentro do mapa;
     - [x] Adicionar a posição à lista de posições ocupadas.
 - [ ] Implementar a função `desenha_tela`:
-    - [ ] Mostrar mapa;
-    - [ ] Mostrar jogador;
-    - [ ] Mostrar objetos;
+    - [x] Mostrar mapa;
+    - [x] Mostrar jogador;
+    - [x] Mostrar objetos;
     - [ ] Mostrar quantidade de vidas (se o jogador tiver menos vidas do que o máximo, o restante deve ser mostrado como corações brancos - exemplo: 🧡🧡🧡🤍🤍);
-    - [ ] Mostrar mensagem.
+    - [x] Mostrar mensagem.
 - [ ] Implementar a função `atualiza_estado`:
     - [ ] Mover o jogador;
     - [ ] Impedir o jogador de sair do mapa;

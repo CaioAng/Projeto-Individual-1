@@ -7,21 +7,21 @@ import motor_grafico as motor  # Utilize as funções do arquivo motor_grafico.p
 
 def desenha_tela(janela, estado, altura_tela, largura_tela):
     motor.preenche_fundo(janela, PRETO)
-    deltax = 15
-    deltay = 15
-
     mapa = estado["mapa"]
+    deltax = (largura_tela - len(mapa[0]))//2
+    deltay = (altura_tela - len(mapa))//2    
     for i in range(len(mapa)):
         for j in range(len(mapa[0])):
             if (i + j) % 2 == 0:
-                motor.desenha_string(janela, j, i, '▯', CINZA_MEDIO_AZULADO, CINZA_ESCURO_AZULADO)
+                motor.desenha_string(janela, j + deltax, i + deltay, '▯', CINZA_MEDIO_AZULADO, CINZA_ESCURO_AZULADO)
             else:
-                motor.desenha_string(janela, j, i, '▯', CINZA_CLARO_AZULADO, CINZA_ESCURO_AZULADO)
-    motor.desenha_string(janela, estado["pos_jogador"][0], estado["pos_jogador"][1], '@', VERDE_CLARO, PRETO)
+                motor.desenha_string(janela, j + deltax, i + deltay, '▯', CINZA_CLARO_AZULADO, CINZA_ESCURO_AZULADO)
+    motor.desenha_string(janela, estado["pos_jogador"][0] + deltax, estado["pos_jogador"][1]+ deltay, '𓁆', CINZA_ESCURO_AZULADO, BRANCO)
     for objeto in estado["objetos"]:
-        motor.desenha_string(janela, objeto["posicao"][0], objeto["posicao"][1], objeto["tipo"], VERDE_CLARO, objeto["cor"])  
-    
-    motor.desenha_string(janela, 1, 1, estado["vidas"]*'❤︎ ', MARROM_ESCURO, VERMELHO)
+        motor.desenha_string(janela, objeto["posicao"][0] + deltax, objeto["posicao"][1]+ deltay, objeto["tipo"], CINZA_ESCURO_AZULADO, objeto["cor"])  
+    motor.desenha_string(janela, 0+ deltax, deltay-1, estado["vidas"]*'❤︎ ', PRETO, VERMELHO)
+    motor.desenha_string(janela, 0+ deltax, len(mapa) + deltay + 1, estado["mensagem"], PRETO, BRANCO)
+
 
 def atualiza_estado(estado, tecla):
     # O seu código deve atualizar o dicionário "estado" com base na tecla apertada pelo jogador
