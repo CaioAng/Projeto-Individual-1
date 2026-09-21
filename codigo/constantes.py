@@ -14,6 +14,9 @@ VERMELHO = [255, 0, 0]
 ROXO = [200, 0, 200]
 MARROM_ESCURO = [100, 50, 0]
 MARROM_MAIS_ESCURO = [75, 40, 0]
+CINZA_ESCURO_AZULADO = [78, 89, 111]
+CINZA_MEDIO_AZULADO = [99, 110, 132]
+CINZA_CLARO_AZULADO = [120, 131, 154]
 
 # Telas
 # As constantes abaixo são apenas números. Elas são usadas para controlar qual tela deve ser desenhada.

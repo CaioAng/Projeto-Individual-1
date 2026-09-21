@@ -6,16 +6,14 @@ from constantes import *  # Você pode usar as constantes definidas em constante
 
 
 def gera_posicao_desocupada(posicoes_ocupadas, largura_mapa, altura_mapa):
-    # Implemente esta função para o nível básico
-    # A função deve retornar uma posição aleatória dentro da janela que não esteja na lista de posições ocupadas.
-    # Uma posição é uma lista com exatas dois elementos: a posição x e a posição y.
-    # Além disso, a posição gerada deve ser adicionada à lista de posições ocupadas.
-    
-    # O código abaixo é apenas um exem asadsasddplo. Você deve apagar este código e escrever o seu, fazendo o que foi pedido acima.
-    x = randint(1, largura_mapa-2)
-    y = randint(1, altura_mapa-2)
-    posicao = [x, y]
-    return posicao
+    while True:
+        x = randint(1, largura_mapa - 2)
+        y = randint(1, altura_mapa - 2)
+        posicao = [x, y]
+        if posicao not in posicoes_ocupadas:
+            posicoes_ocupadas.append(posicao)
+            return posicao
+
 
 
 def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocupadas):
@@ -50,21 +48,32 @@ def inicializa_estado():
     # Cria lista de listas, cada uma com 50 espaços em branco
     # Você pode mudar esta lista, inclusive seu tamanho, à vontade
     mapa = [
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,    
+        [' '] * 80,
+        [' '] * 80,
+        [' '] * 80,
     ]
     
     largura_mapa = len(mapa[0])

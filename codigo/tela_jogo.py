@@ -6,17 +6,22 @@ import motor_grafico as motor  # Utilize as funções do arquivo motor_grafico.p
 
 
 def desenha_tela(janela, estado, altura_tela, largura_tela):
-    # Utilize o dicionário estado para saber onde o jogador e os outros objetos estão.
-    # Por exemplo, para saber a posição do jogador, use estado['pos_jogador']
-    # O mapa esta armazenado em estado['mapa'].
     motor.preenche_fundo(janela, PRETO)
+    deltax = 15
+    deltay = 15
+
+    mapa = estado["mapa"]
+    for i in range(len(mapa)):
+        for j in range(len(mapa[0])):
+            if (i + j) % 2 == 0:
+                motor.desenha_string(janela, j, i, '▯', CINZA_MEDIO_AZULADO, CINZA_ESCURO_AZULADO)
+            else:
+                motor.desenha_string(janela, j, i, '▯', CINZA_CLARO_AZULADO, CINZA_ESCURO_AZULADO)
+    motor.desenha_string(janela, estado["pos_jogador"][0], estado["pos_jogador"][1], '@', VERDE_CLARO, PRETO)
+    for objeto in estado["objetos"]:
+        motor.desenha_string(janela, objeto["posicao"][0], objeto["posicao"][1], objeto["tipo"], VERDE_CLARO, objeto["cor"])  
     
-    # O seu código deve desenhar a tela do jogo aqui a partir dos valores no dicionário "estado"
-    # APAGUE ESTA LINHA E A LINHA ABAIXO E ESCREVA SEU CÓDIGO AQUI
-    motor.desenha_string(janela, 0, altura_tela // 2, 'APAGUE ESTA LINHA', PRETO, BRANCO)
-
-    motor.mostra_janela(janela)
-
+    motor.desenha_string(janela, 1, 1, estado["vidas"]*'❤︎ ', MARROM_ESCURO, VERMELHO)
 
 def atualiza_estado(estado, tecla):
     # O seu código deve atualizar o dicionário "estado" com base na tecla apertada pelo jogador
