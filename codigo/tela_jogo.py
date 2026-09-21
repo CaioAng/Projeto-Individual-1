@@ -24,10 +24,15 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
 
 
 def atualiza_estado(estado, tecla):
-    # O seu código deve atualizar o dicionário "estado" com base na tecla apertada pelo jogador
-    # Por exemplo, se o jogador apertar a seta para a esquerda (o valor da variável será "ESQUERDA"), 
-    # o seu código deve atualizar o dicionário estado['pos_jogador'][0] -= 1
-
+    if tecla == "CIMA":
+        estado["pos_jogador"][1] -= 1
+    if tecla == "BAIXO":
+        estado["pos_jogador"][1] += 1
+    if tecla == "ESQUERDA":
+        estado["pos_jogador"][1] -= 1
+    if tecla == "DIREITA":
+        estado["pos_jogador"][1] += 1
+    
     # Mude o valor da chave 'tela_atual' para mudar de tela
     
     # Começamos apagando a mensagem anterior, pois ela já foi mostrada no frame anterior
