@@ -26,9 +26,9 @@ No nível básico você deve entender o código fornecido e implementar as segui
         - [x] Aumentar uma vida caso ainda não esteja no máximo;
         - [x] Não aumentar caso contrário;
         - [x] Adicionar uma mensagem indicando o que aconteceu.
-    - [ ] Ao colidir com um espinho:
+    - [x] Ao colidir com um espinho:
         - [x] Diminuir uma vida;
-        - [ ] Terminar o jogo caso tenha atingido zero vidas (mudar `estado['tela_atual']`).
+        - [x] Terminar o jogo caso tenha atingido zero vidas (mudar `estado['tela_atual']`).
 
 ### [Nível Proficiente](proficiente.md)
 
@@ -62,5 +62,5 @@ No nível básico você deve entender o código fornecido e implementar as segui
 - [ ] Funcionalidade 7: Equipamento e limite de mochila;
 - [ ] Funcionalidade 8: Mapa em arquivo;
 - [ ] Funcionalidade 9: Monstro cobrinha;
-- [ ] Funcionalidade 10: Telas adicionais;
+- [x] Funcionalidade 10: Telas adicionais;
 - [ ] Funcionalidade 11: [Sua sugestão validada por um professor - INDIQUE AQUI O NOME DO PROFESSOR QUE VALIDOU SUA IDEIA].
