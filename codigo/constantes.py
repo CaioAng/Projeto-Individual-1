@@ -23,6 +23,8 @@ CINZA_CLARO_AZULADO = [120, 131, 154]
 SAIR = 0
 TELA_JOGO = 1
 TELA_INVENTARIO = 2
+TELA_GAMEOVER = 3
+TELA_INICIO = 4
 
 # Objetos
 # As constantes abaixo são os caracteres que representam cada objeto no mapa.

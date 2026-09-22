@@ -1,7 +1,9 @@
 import motor_grafico
 import tela_inventario
 import tela_jogo
-from constantes import SAIR, TELA_INVENTARIO, TELA_JOGO
+import tela_gameover
+import tela_inicio
+from constantes import SAIR, TELA_INVENTARIO, TELA_JOGO, TELA_GAMEOVER, TELA_INICIO
 from inicializacao import inicializa_estado
 
 
@@ -26,10 +28,11 @@ def jogo(janela, altura_tela, largura_tela):
         # jogador aperte uma tecla e retorna qual tecla foi apertada. Enquanto o jogador não
         # apertar uma tecla, a função fica travada.
 
-        # A função atualiza_estado é responsável por modificar o valor na chave 'tela_atual',
-        # que é a chave que controla qual tela deve ser desenhada (ou se o jogo deve terminar)
-        
-        if estado['tela_atual'] == TELA_JOGO:
+        if estado['tela_atual'] == TELA_INICIO:
+            tela_inicio.desenha_tela(janela, estado, altura_tela, largura_tela)
+            tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
+            tela_inicio.atualiza_estado(estado, tecla_apertada)       
+        elif estado['tela_atual'] == TELA_JOGO:
             tela_jogo.desenha_tela(janela, estado, altura_tela, largura_tela)
             tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
             tela_jogo.atualiza_estado(estado, tecla_apertada)
@@ -37,7 +40,11 @@ def jogo(janela, altura_tela, largura_tela):
             tela_inventario.desenha_tela(janela, estado, altura_tela, largura_tela)
             tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
             tela_inventario.atualiza_estado(estado, tecla_apertada)
-
+        elif estado['tela_atual'] == TELA_GAMEOVER:
+            tela_gameover.desenha_tela(janela, estado, altura_tela, largura_tela)
+            tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
+            tela_gameover.atualiza_estado(estado, tecla_apertada)
+        
 
 # Não se preocupe, você não precisa entender o que está acontecendo aqui.
 # É apenas uma forma de chamar a função jogo() usando a biblioteca curses.

@@ -52,7 +52,11 @@ def atualiza_estado(estado, tecla):
                 estado['mensagem'] = 'Ganhou uma vida!'
             if objeto["tipo"] == ESPINHO:
                 estado["vidas"] -= 1
-                estado['mensagem'] = 'Perdeu uma vida, cuidado...'
+                if estado["vidas"] <= 0:
+                    estado["vidas"] = 5
+                    estado["tela_atual"] = TELA_GAMEOVER
+                else:
+                    estado['mensagem'] = 'Perdeu uma vida, cuidado...'
             estado["objetos"].remove(objeto)
                 
         
@@ -61,7 +65,6 @@ def atualiza_estado(estado, tecla):
     
     # Começamos apagando a mensagem anterior, pois ela já foi mostrada no frame anterior
     
-
     # Escreva seu código para atualizar o dicionário "estado" com base na tecla apertada pelo jogador aqui
     # APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO AQUI
 
