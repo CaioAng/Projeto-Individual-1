@@ -19,8 +19,9 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     motor.desenha_string(janela, estado["pos_jogador"][0] + deltax, estado["pos_jogador"][1]+ deltay, '@', CINZA_ESCURO_AZULADO, BRANCO)
     for objeto in estado["objetos"]:
         motor.desenha_string(janela, objeto["posicao"][0] + deltax, objeto["posicao"][1]+ deltay, objeto["tipo"], CINZA_ESCURO_AZULADO, objeto["cor"])  
-    motor.desenha_string(janela, 0+ deltax, deltay-1, estado["vidas"]*'❤︎ ', PRETO, VERMELHO)
-    motor.desenha_string(janela, 0+ deltax, len(mapa) + deltay + 1, estado["mensagem"], PRETO, BRANCO)
+    motor.desenha_string(janela, 0+ deltax, deltay-1, estado["max_vidas"]*'🤍', PRETO, BRANCO)
+    motor.desenha_string(janela, 0+ deltax, deltay-1, estado["vidas"]*'🧡', PRETO, VERMELHO)
+    motor.desenha_string(janela, 0+ deltax, deltay+len(mapa), estado["mensagem"], PRETO, BRANCO)
 
 
 def atualiza_estado(estado, tecla):
@@ -28,23 +29,38 @@ def atualiza_estado(estado, tecla):
         posicaofut = estado["pos_jogador"][1] - 1
         if posicaofut >= 0:
             estado["pos_jogador"][1] -= 1
+            estado['mensagem'] = ''
     if tecla == "BAIXO":
         posicaofut = estado["pos_jogador"][1] + 1
         if posicaofut <= len(estado["mapa"])-1:
             estado["pos_jogador"][1] += 1
+            estado['mensagem'] = ''
     if tecla == "ESQUERDA":
         posicaofut = estado["pos_jogador"][0] - 1
         if posicaofut >= 0:
             estado["pos_jogador"][0] -= 1
+            estado['mensagem'] = ''
     if tecla == "DIREITA":
         posicaofut = estado["pos_jogador"][0] + 1
         if posicaofut <= len(estado["mapa"][0])-1:
             estado["pos_jogador"][0] += 1
+            estado['mensagem'] = ''
+    for objeto in estado["objetos"]:
+        if estado["pos_jogador"] == objeto["posicao"]:
+            if objeto["tipo"] == CORACAO and estado["vidas"]<=4:
+                estado["vidas"] += 1
+                estado['mensagem'] = 'Ganhou uma vida!'
+            if objeto["tipo"] == ESPINHO:
+                estado["vidas"] -= 1
+                estado['mensagem'] = 'Perdeu uma vida, cuidado...'
+            estado["objetos"].remove(objeto)
+                
+        
     
     # Mude o valor da chave 'tela_atual' para mudar de tela
     
     # Começamos apagando a mensagem anterior, pois ela já foi mostrada no frame anterior
-    estado['mensagem'] = ''
+    
 
     # Escreva seu código para atualizar o dicionário "estado" com base na tecla apertada pelo jogador aqui
     # APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO AQUI

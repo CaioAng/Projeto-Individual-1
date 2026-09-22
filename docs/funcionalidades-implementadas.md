@@ -12,22 +12,22 @@ No nível básico você deve entender o código fornecido e implementar as segui
 - [x] Implementar a função `gera_posicao_desocupada`;
     - [x] Devolver uma posição aleatória dentro do mapa;
     - [x] Adicionar a posição à lista de posições ocupadas.
-- [ ] Implementar a função `desenha_tela`:
+- [x] Implementar a função `desenha_tela`:
     - [x] Mostrar mapa;
     - [x] Mostrar jogador;
     - [x] Mostrar objetos;
-    - [ ] Mostrar quantidade de vidas (se o jogador tiver menos vidas do que o máximo, o restante deve ser mostrado como corações brancos - exemplo: 🧡🧡🧡🤍🤍);
+    - [x] Mostrar quantidade de vidas (se o jogador tiver menos vidas do que o máximo, o restante deve ser mostrado como corações brancos - exemplo: 🧡🧡🧡🤍🤍);
     - [x] Mostrar mensagem.
-- [ ] Implementar a função `atualiza_estado`:
+- [x] Implementar a função `atualiza_estado`:
     - [x] Mover o jogador;
     - [x] Impedir o jogador de sair do mapa;
-    - [ ] Ao colidir com um coração:
-        - [ ] Remover o coração da lista de objetos;
-        - [ ] Aumentar uma vida caso ainda não esteja no máximo;
-        - [ ] Não aumentar caso contrário;
-        - [ ] Adicionar uma mensagem indicando o que aconteceu.
+    - [x] Ao colidir com um coração:
+        - [x] Remover o coração da lista de objetos;
+        - [x] Aumentar uma vida caso ainda não esteja no máximo;
+        - [x] Não aumentar caso contrário;
+        - [x] Adicionar uma mensagem indicando o que aconteceu.
     - [ ] Ao colidir com um espinho:
-        - [ ] Diminuir uma vida;
+        - [x] Diminuir uma vida;
         - [ ] Terminar o jogo caso tenha atingido zero vidas (mudar `estado['tela_atual']`).
 
 ### [Nível Proficiente](proficiente.md)
