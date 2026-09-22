@@ -23,7 +23,8 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     motor.desenha_string(janela, 0+ deltax, deltay-1, estado["vidas"]*'🧡', PRETO, VERMELHO)
     motor.desenha_string(janela, 0+ deltax, deltay+len(mapa), estado["mensagem"], PRETO, BRANCO)
 
-
+# def move_jogador(estado, tecla): funcao feita para que a funcao def atualiza estado nao fique tao grande
+# def colisoes(estado): funcao feita para que a funcao def atualiza estado nao fique tao grande
 def atualiza_estado(estado, tecla):
     if tecla == "CIMA":
         posicaofut = estado["pos_jogador"][1] - 1
@@ -58,17 +59,7 @@ def atualiza_estado(estado, tecla):
                 else:
                     estado['mensagem'] = 'Perdeu uma vida, cuidado...'
             estado["objetos"].remove(objeto)
-                
-        
-    
-    # Mude o valor da chave 'tela_atual' para mudar de tela
-    
-    # Começamos apagando a mensagem anterior, pois ela já foi mostrada no frame anterior
-    
-    # Escreva seu código para atualizar o dicionário "estado" com base na tecla apertada pelo jogador aqui
-    # APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO AQUI
 
-    # Ao apertar a tecla 'i', o jogador deve ver o inventário
     if tecla == 'i':
         estado['tela_atual'] = TELA_INVENTARIO
     # Termina o jogo se o jogador apertar ESC ou 'q'

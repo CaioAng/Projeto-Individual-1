@@ -1,6 +1,8 @@
 from constantes import *
 import motor_grafico as motor
 
+# esse arquivo é o que desenha e "atualiza o estado" da tela de gameover, quando o jogador perde o jogo
+
 def desenha_tela(janela, estado, altura_tela, largura_tela):
     motor.preenche_fundo(janela, PRETO)
     mapa = estado["mapa"]

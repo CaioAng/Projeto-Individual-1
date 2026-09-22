@@ -1,6 +1,8 @@
 from constantes import *
 import motor_grafico as motor
 
+# esse arquivo é o que desenha e "atualiza o estado" da tela de inicio, quando o jogador abre o jogo
+
 def desenha_tela(janela, estado, altura_tela, largura_tela):
     motor.preenche_fundo(janela, PRETO)
     mapa = estado["mapa"]
