@@ -34,13 +34,13 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     motor.desenha_string(janela, estado["pos_jogador"][0] + deltax, estado["pos_jogador"][1]+ deltay, JOGADOR, CINZA_ESCURO_AZULADO, BRANCO)
     for objeto in estado["objetos"]:
         motor.desenha_string(janela, objeto["posicao"][0] + deltax, objeto["posicao"][1]+ deltay, objeto["tipo"], CINZA_ESCURO_AZULADO, objeto["cor"])  
+    for monstros in estado["monstros"]:
+        motor.desenha_string(janela, monstros["posicao"][0] + deltax, monstros["posicao"][1]+ deltay, monstros["tipo"], CINZA_ESCURO_AZULADO, monstros["cor"])
     motor.desenha_string(janela, 0+ deltax, deltay-1, estado["max_vidas"]*'🤍', PRETO, BRANCO)
     motor.desenha_string(janela, 0+ deltax, deltay-1, estado["vidas"]*'🧡', PRETO, VERMELHO)
     desenha_parede(janela, estado, altura_tela, largura_tela)
     motor.desenha_string(janela, 0+ deltax, deltay+len(mapa), estado["mensagem"], PRETO, BRANCO)
     
-
-
 def move_jogador(estado, tecla): #funcao feita para que a funcao def atualiza estado nao fique tao grande
     posicaofut = estado["pos_jogador"][:]
     if tecla == "CIMA":
@@ -73,11 +73,12 @@ def colisoes(estado): #funcao feita para que a funcao def atualiza estado nao fi
                     estado['mensagem'] = 'Perdeu uma vida, cuidado...'
             estado["objetos"].remove(objeto)
 
+def move_gosma(estado, tecla):
+    for monstros in estado["monstros"]:
+        if monstros["tipo"] == GOSMA:
+            if tecla == "CIMA" or tecla == "BAIXO" or tecla == "ESQUERDA" or tecla == "DIREITA":
+                monstros["posicao"][random.randint(0,1)] += random.randint(-1, 1)
 
-
-# def move_gosma(estado, tecla):
-#     if tecla == "CIMA" or tecla == "BAIXO" or tecla == "ESQUERDA" or tecla == "DIREITA":
-#         estado["pos_gosma"][random.randint(0,1)] += random.randint(-1, 1)
 
 def atualiza_estado(estado, tecla):
     move_jogador(estado, tecla)

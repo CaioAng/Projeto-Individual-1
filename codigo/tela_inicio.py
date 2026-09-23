@@ -10,8 +10,8 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     deltay = (altura_tela - len(mapa))//2    
     for i in range(len(mapa)):
         for j in range(len(mapa[0])):
-            motor.desenha_string(janela, j + deltax, i + deltay, '|', CINZA_ESCURO_AZULADO, CINZA_MEDIO_AZULADO)
-    motor.desenha_string(janela, len(mapa[0])//2 + deltax - 9, len(mapa)//2 + deltay+ 2, 'Aperte ↑ para jogar', CINZA_MEDIO_AZULADO, BRANCO)
+            motor.desenha_string(janela, j + deltax, i + deltay, '""', CINZA_ESCURO_AZULADO, CINZA_MEDIO_AZULADO)
+    motor.desenha_string(janela, len(mapa[0])//2 + deltax - 9, len(mapa)//2 + deltay+ 2, 'Aperte ↑ para jogar', CINZA_MUITO_ESCURO_AZULADO, BRANCO)
     motor.desenha_string(janela, len(mapa[0])//2 + deltax - 8, len(mapa)//2 + deltay - 6, 'PROJETO INDIVIDUAL', CINZA_CLARO_AZULADO, BRANCO)
     motor.desenha_string(janela, len(mapa[0])//2 + deltax - 9, len(mapa)//2 + deltay - 6, ' ', CINZA_CLARO_AZULADO, BRANCO)
     motor.desenha_string(janela, len(mapa[0])//2 + deltax + 10, len(mapa)//2 + deltay - 6, ' ', CINZA_CLARO_AZULADO, BRANCO)

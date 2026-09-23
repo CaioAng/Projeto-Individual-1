@@ -34,3 +34,4 @@ CORACAO = '❤'
 ESPINHO = '#'
 MONSTRO = '☠'
 PAREDE = '▣'
+GOSMA = "•"

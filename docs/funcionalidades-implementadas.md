@@ -32,10 +32,10 @@ No nível básico você deve entender o código fornecido e implementar as segui
 
 ### [Nível Proficiente](proficiente.md)
 
-- [ ] Adiciona paredes na inicialização (ainda sem colisão);
-- [ ] Adiciona colisão com as paredes:
-    - [ ] Impede o movimento do jogador:
-    - [ ] Mostra mensagem na tela.
+- [x] Adiciona paredes na inicialização (ainda sem colisão);
+- [x] Adiciona colisão com as paredes:
+    - [x] Impede o movimento do jogador:
+    - [x] Mostra mensagem na tela.
 - [ ] Adiciona monstros:
     - [ ] Sorteia posições aleatórias para os monstros;
     - [ ] Adiciona `'vida'` e `'probabilidade_de_ataque'` aos monstros;
