@@ -18,6 +18,7 @@ CINZA_ESCURO_AZULADO = [78, 89, 111]
 CINZA_MEDIO_AZULADO = [99, 110, 132]
 CINZA_CLARO_AZULADO = [120, 131, 154]
 CINZA_MUITO_ESCURO_AZULADO = [57, 68, 90]
+ROXO2 = [106, 27, 154]
 # Telas
 # As constantes abaixo são apenas números. Elas são usadas para controlar qual tela deve ser desenhada.
 SAIR = 0
@@ -25,13 +26,14 @@ TELA_JOGO = 1
 TELA_INVENTARIO = 2
 TELA_GAMEOVER = 3
 TELA_INICIO = 4
+TELA_SALA_SECRETA = 5
 
 # Objetos
 # As constantes abaixo são os caracteres que representam cada objeto no mapa.
 # Você pode mudar os caracteres para o que preferir.
 JOGADOR = '@'
-CORACAO = '❤'
+CORACAO = '♥'
 ESPINHO = '#'
 MONSTRO = '☠'
 PAREDE = '▣'
-GOSMA = "•"
+GOSMA = "●"

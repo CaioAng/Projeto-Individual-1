@@ -56,7 +56,19 @@ def gera_paredes():
             if pixel == "X":
                 paredes.append([x, y])
     return paredes
-    
+
+def gera_paredessecreta():
+    with open("sala_secreta.txt", "r") as arquivo:
+        mapa = arquivo.read()
+    paredes = []
+    mapa_linha = mapa.split()
+    for y in range(len(mapa_linha)):
+        linha = mapa_linha[y]
+        for x in range(len(linha)):
+            pixel = linha[x]
+            if pixel == "X":
+                paredes.append([x, y])
+    return paredes
 
 def inicializa_estado():
     mapa = [
@@ -104,13 +116,14 @@ def inicializa_estado():
     monstros += gera_monstros(6, GOSMA, VERDE_CLARO, 2, 0.2, largura_mapa, altura_mapa, posicoes_ocupadas)
     
     return {
-        'tela_atual': TELA_INICIO,
+        'tela_atual': TELA_SALA_SECRETA,
         'pos_jogador': pos_jogador,
         'vidas': 5,  # Quantidade atual de vidas do jogador - ele pode perder vidas ao colidir com espinhos ou ganhar vidas ao pegar corações
         'max_vidas': 5,  # Quantidade máxima de vidas que o jogador pode ter - o valor da chave 'vidas' nunca pode ser maior que o valor da chave 'max_vidas'
         'objetos': objetos,
         'mapa': mapa,
         'paredes': gera_paredes(),
+        "paredessecreta": gera_paredessecreta(),
         'mensagem': '',  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
         "monstros": monstros,
     }

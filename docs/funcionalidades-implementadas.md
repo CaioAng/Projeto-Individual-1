@@ -36,10 +36,10 @@ No nível básico você deve entender o código fornecido e implementar as segui
 - [x] Adiciona colisão com as paredes:
     - [x] Impede o movimento do jogador:
     - [x] Mostra mensagem na tela.
-- [ ] Adiciona monstros:
-    - [ ] Sorteia posições aleatórias para os monstros;
-    - [ ] Adiciona `'vida'` e `'probabilidade_de_ataque'` aos monstros;
-    - [ ] Mostra monstros na tela.
+- [x] Adiciona monstros:
+    - [x] Sorteia posições aleatórias para os monstros;
+    - [x] Adiciona `'vida'` e `'probabilidade_de_ataque'` aos monstros;
+    - [x] Mostra monstros na tela.
 - [ ] Implementa sistema de batalha:
     - [ ] Verifica se a nova posição do jogador está ocupada por um monstro e impede o movimento;
     - [ ] Sorteia um número aleatório;
@@ -47,9 +47,9 @@ No nível básico você deve entender o código fornecido e implementar as segui
     - [ ] Se o jogador morrer, acaba o jogo;
     - [ ] Se o monstro morrer, o monstro é removido da lista e o jogador avança para a posição do monstro;
     - [ ] Mostra mensagem na tela.
-- [ ] Implementa movimentação aleatória dos monstros:
-    - [ ] Sorteia um movimento para cada monstro e tenta andar naquela direção;
-    - [ ] Atualiza a posição se for uma posição válida (dentro do mapa e desocupada).
+- [x] Implementa movimentação aleatória dos monstros:
+    - [x] Sorteia um movimento para cada monstro e tenta andar naquela direção;
+    - [x] Atualiza a posição se for uma posição válida (dentro do mapa e desocupada).
 
 ### [Nível Avançado](avancado.md)
 
@@ -60,7 +60,7 @@ No nível básico você deve entender o código fornecido e implementar as segui
 - [ ] Funcionalidade 5: Sistema de experiência e níveis;
 - [ ] Funcionalidade 6: Itens e inventário;
 - [ ] Funcionalidade 7: Equipamento e limite de mochila;
-- [ ] Funcionalidade 8: Mapa em arquivo;
+- [x] Funcionalidade 8: Mapa em arquivo;
 - [ ] Funcionalidade 9: Monstro cobrinha;
 - [x] Funcionalidade 10: Telas adicionais;
 - [ ] Funcionalidade 11: [Sua sugestão validada por um professor - INDIQUE AQUI O NOME DO PROFESSOR QUE VALIDOU SUA IDEIA].
