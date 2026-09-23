@@ -43,6 +43,19 @@ def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocup
 
     return objetos
 
+def gera_paredes():
+    with open("mapa.txt", "r") as arquivo:
+        mapa = arquivo.read()
+    paredes = []
+    mapa_linha = mapa.split()
+    for y in range(len(mapa_linha)):
+        linha = mapa_linha[y]
+        for x in range(len(linha)):
+            pixel = linha[x]
+            if pixel == "X":
+                paredes.append([x, y])
+    return paredes
+    
 
 def inicializa_estado():
     mapa = [
@@ -85,6 +98,7 @@ def inicializa_estado():
     objetos = []
     objetos += gera_objetos(8, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
     objetos += gera_objetos(6, ESPINHO, MARROM_ESCURO, largura_mapa, altura_mapa, posicoes_ocupadas)
+    # obejtos += gera_objetos(6, GOSMA, VERDE_CLARO, largura_mapa, altura_mapa, posicoes_ocupadas)
 
     
     return {
@@ -94,5 +108,6 @@ def inicializa_estado():
         'max_vidas': 5,  # Quantidade máxima de vidas que o jogador pode ter - o valor da chave 'vidas' nunca pode ser maior que o valor da chave 'max_vidas'
         'objetos': objetos,
         'mapa': mapa,
+        'paredes': gera_paredes(),
         'mensagem': '',  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
     }
