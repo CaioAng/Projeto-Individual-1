@@ -14,8 +14,6 @@ def gera_posicao_desocupada(posicoes_ocupadas, largura_mapa, altura_mapa):
             posicoes_ocupadas.append(posicao)
             return posicao
 
-
-
 def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocupadas):
     objetos = []
 
@@ -29,7 +27,7 @@ def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocup
 
     return objetos
 
-def gera_monstros(quantidade, tipo, cor, vida, probatk, largura_mapa, altura_mapa, posicoes_ocupadas):
+def gera_monstros(quantidade, tipo, cor, vida, probatk, largura_mapa, altura_mapa, posicoes_ocupadas): #essa funcao é uma replica da gera objetos com informacoes a mais, vida e probabilidade de ataque
     monstros = []
 
     for i in range(quantidade):
@@ -44,7 +42,7 @@ def gera_monstros(quantidade, tipo, cor, vida, probatk, largura_mapa, altura_map
 
     return monstros
 
-def gera_paredes():
+def gera_paredes(): #essa funcao usa o arquivo txt para criar uma lista com paredes
     with open("mapa.txt", "r") as arquivo:
         mapa = arquivo.read()
     paredes = []
@@ -57,7 +55,7 @@ def gera_paredes():
                 paredes.append([x, y])
     return paredes
 
-def gera_paredessecreta():
+def gera_paredessecreta(): #essa funcao é uma replica da acima que cria paredes para a sala secreta
     with open("sala_secreta.txt", "r") as arquivo:
         mapa = arquivo.read()
     paredes = []
@@ -119,7 +117,7 @@ def inicializa_estado():
         'tela_atual': TELA_INICIO,
         'pos_jogador': pos_jogador,
         'pos_jogadorsecreta': [2,5],
-        'vidas': 1,  # Quantidade atual de vidas do jogador - ele pode perder vidas ao colidir com espinhos ou ganhar vidas ao pegar corações
+        'vidas': 5,  # Quantidade atual de vidas do jogador - ele pode perder vidas ao colidir com espinhos ou ganhar vidas ao pegar corações
         'max_vidas': 5,  # Quantidade máxima de vidas que o jogador pode ter - o valor da chave 'vidas' nunca pode ser maior que o valor da chave 'max_vidas'
         'objetos': objetos,
         'mapa': mapa,
