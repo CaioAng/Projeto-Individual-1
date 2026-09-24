@@ -116,8 +116,9 @@ def inicializa_estado():
     monstros += gera_monstros(6, GOSMA, VERDE_CLARO, 2, 0.2, largura_mapa, altura_mapa, posicoes_ocupadas)
     
     return {
-        'tela_atual': TELA_SALA_SECRETA,
+        'tela_atual': TELA_JOGO,
         'pos_jogador': pos_jogador,
+        'pos_jogadorsecreta': [2,5],
         'vidas': 5,  # Quantidade atual de vidas do jogador - ele pode perder vidas ao colidir com espinhos ou ganhar vidas ao pegar corações
         'max_vidas': 5,  # Quantidade máxima de vidas que o jogador pode ter - o valor da chave 'vidas' nunca pode ser maior que o valor da chave 'max_vidas'
         'objetos': objetos,

@@ -1,0 +1,119 @@
+from constantes import *  # Você pode usar as constantes definidas em constantes.py, se achar útil
+                          # Por exemplo, usar a constante CORACAO é o mesmo que colocar a string '❤'
+                          # diretamente no código
+import motor_grafico as motor  # Utilize as funções do arquivo motor_grafico.py para desenhar na tela
+                               # Por exemplo: motor.preenche_fundo(janela, [0, 0, 0]) preenche o fundo de preto
+import random
+
+# isso aqui é a mesma coisa que o arquivo tela_jogo mas para uma sala secreta
+
+def desenha_portal(janela, estado, altura_tela, largura_tela):
+    mapa = [
+    [' '] * 20,
+    [' '] * 20,
+    [' '] * 20,
+    [' '] * 20,
+    [' '] * 20,
+    [' '] * 20,
+    [' '] * 20,
+    [' '] * 20,
+    ]
+    deltax = (largura_tela - len(mapa[0]))//2
+    deltay = (altura_tela - len(mapa))//2
+    motor.desenha_string(janela, 1 + deltax, deltay + 6, "░", ROXO2, ROXO)
+    motor.desenha_string(janela, 2 + deltax, deltay + 6, "░", ROXO2, ROXO)
+    motor.desenha_string(janela, 3 + deltax, deltay + 6, "░", ROXO2, ROXO)
+
+def desenha_parede(janela, estado, altura_tela, largura_tela):
+    mapa = [
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+    ]
+    deltax = (largura_tela - len(mapa[0]))//2
+    deltay = (altura_tela - len(mapa))//2
+    for parede in estado["paredessecreta"]:
+        motor.desenha_string(janela, parede[0] + deltax, parede[1] + deltay, PAREDE, CINZA_ESCURO_AZULADO, CINZA_MUITO_ESCURO_AZULADO)
+
+def desenha_tela(janela, estado, altura_tela, largura_tela):
+    motor.preenche_fundo(janela, PRETO)
+    
+    mapa = [
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+        [' '] * 20,
+    ]
+    deltax = (largura_tela - len(mapa[0]))//2
+    deltay = (altura_tela - len(mapa))//2
+    for i in range(len(mapa)):
+        for j in range(len(mapa[0])):
+            if (i + j) % 2 == 0:
+                motor.desenha_string(janela, j + deltax, i + deltay, '▯', CINZA_MEDIO_AZULADO, CINZA_ESCURO_AZULADO)
+            else:
+                motor.desenha_string(janela, j + deltax, i + deltay, '▯', CINZA_CLARO_AZULADO, CINZA_ESCURO_AZULADO)
+    desenha_portal(janela, estado, altura_tela, largura_tela)
+    motor.desenha_string(janela, estado["pos_jogadorsecreta"][0] + deltax, estado["pos_jogadorsecreta"][1]+ deltay, JOGADOR, CINZA_ESCURO_AZULADO, BRANCO)
+    # for objeto in estado["objetos"]:
+    #     motor.desenha_string(janela, objeto["posicao"][0] + deltax, objeto["posicao"][1]+ deltay, objeto["tipo"], CINZA_MEDIO_AZULADO, objeto["cor"])  
+    # for monstros in estado["monstros"]:
+    #     motor.desenha_string(janela, monstros["posicao"][0] + deltax, monstros["posicao"][1]+ deltay, monstros["tipo"], CINZA_MEDIO_AZULADO, monstros["cor"])
+    motor.desenha_string(janela, 0+ deltax, deltay-1, estado["max_vidas"]*'🤍', PRETO, BRANCO)
+    motor.desenha_string(janela, 0+ deltax, deltay-1, estado["vidas"]*'🧡', PRETO, VERMELHO)
+    desenha_parede(janela, estado, altura_tela, largura_tela)
+    motor.desenha_string(janela, 0+ deltax, deltay+len(mapa), estado["mensagem"], PRETO, BRANCO)
+
+def move_gosma(estado, tecla):
+    for monstros in estado["monstros"]:
+        posfutura = []
+        if monstros["tipo"] == GOSMA:
+            if tecla == "CIMA" or tecla == "BAIXO" or tecla == "ESQUERDA" or tecla == "DIREITA":
+                x = random.randint(0,1)
+                if x == 0:
+                    posmonstros2 = monstros["posicao"][0] + random.randint(-1, 1)
+                    posfutura.append(posmonstros2)
+                    posfutura.append(monstros["posicao"][1])
+                else:
+                    posmonstros2 = monstros["posicao"][1] + random.randint(-1, 1)
+                    posfutura.append(monstros["posicao"][0])
+                    posfutura.append(posmonstros2)
+                if posfutura not in estado["paredessecreta"]:
+                    monstros["posicao"] = posfutura
+
+def move_jogador(estado, tecla): #funcao feita para que a funcao def atualiza estado nao fique tao grande
+    posicaofut = estado["pos_jogadorsecreta"][:]
+    if tecla == "CIMA":
+        posicaofut[1] -= 1
+    if tecla == "BAIXO":
+        posicaofut[1] += 1     
+    if tecla == "ESQUERDA":
+        posicaofut[0] -= 1
+    if tecla == "DIREITA":
+        posicaofut[0] += 1
+    if posicaofut not in estado["paredessecreta"]:
+        estado["pos_jogadorsecreta"] = posicaofut
+        estado['mensagem'] = ''
+    else:
+        estado["mensagem"] = "bateu na parede"
+
+def atualiza_estado(estado, tecla):
+    move_jogador(estado, tecla)
+    # colisoes(estado)
+    move_gosma(estado, tecla)
+    portal = [[1,6],[2,6],[3,6]]
+    if estado["pos_jogadorsecreta"] in portal:
+            estado["tela_atual"] = TELA_JOGO
+    if tecla == 'i':
+        estado['tela_atual'] = TELA_INVENTARIO
+    # Termina o jogo se o jogador apertar ESC ou 'q'
+    elif tecla == motor.ESCAPE or tecla =='q':
+        estado['tela_atual'] = SAIR

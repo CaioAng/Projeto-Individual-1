@@ -109,4 +109,4 @@ def atualiza_estado(estado, tecla):
     # Termina o jogo se o jogador apertar ESC ou 'q'
     elif tecla == motor.ESCAPE or tecla =='q':
         estado['tela_atual'] = SAIR
-
+    
