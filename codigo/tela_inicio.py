@@ -17,9 +17,12 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     motor.desenha_string(janela, len(mapa[0])//2 + deltax + 10, len(mapa)//2 + deltay - 6, ' ', CINZA_CLARO_AZULADO, BRANCO)
     motor.desenha_string(janela, len(mapa[0])//2 + deltax + -9, len(mapa)//2 + deltay - 5, ' '*20, CINZA_CLARO_AZULADO, BRANCO)
     motor.desenha_string(janela, len(mapa[0])//2 + deltax + -9, len(mapa)//2 + deltay - 7, ' '*20, CINZA_CLARO_AZULADO, BRANCO)
+    motor.desenha_string(janela, len(mapa[0])//2 + deltax - 10, len(mapa)//2 + deltay+ 5, 'Aperte ↓ para tutorial', CINZA_MUITO_ESCURO_AZULADO, BRANCO)
 
 def atualiza_estado(estado, tecla_apertada):
     if tecla_apertada == 'CIMA':
         estado['tela_atual'] = TELA_JOGO
+    if tecla_apertada == 'BAIXO':
+        estado['tela_atual'] = TELA_INSTRUCOES
     elif tecla_apertada in (motor.ESCAPE, 'q'):
         estado['tela_atual'] = SAIR

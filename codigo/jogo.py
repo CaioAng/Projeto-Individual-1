@@ -4,7 +4,8 @@ import tela_jogo
 import tela_gameover
 import tela_inicio
 import tela_sala_secreta
-from constantes import SAIR, TELA_INVENTARIO, TELA_JOGO, TELA_GAMEOVER, TELA_INICIO, TELA_SALA_SECRETA
+import tela_instrucoes
+from constantes import SAIR, TELA_INVENTARIO, TELA_JOGO, TELA_GAMEOVER, TELA_INICIO, TELA_SALA_SECRETA, TELA_INSTRUCOES
 from inicializacao import inicializa_estado
 
 
@@ -32,7 +33,11 @@ def jogo(janela, altura_tela, largura_tela):
         if estado['tela_atual'] == TELA_INICIO:
             tela_inicio.desenha_tela(janela, estado, altura_tela, largura_tela)
             tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
-            tela_inicio.atualiza_estado(estado, tecla_apertada)       
+            tela_inicio.atualiza_estado(estado, tecla_apertada)
+        elif estado['tela_atual'] == TELA_INSTRUCOES:
+            tela_instrucoes.desenha_tela(janela, estado, altura_tela, largura_tela)
+            tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
+            tela_instrucoes.atualiza_estado(estado, tecla_apertada)    
         elif estado['tela_atual'] == TELA_JOGO:
             tela_jogo.desenha_tela(janela, estado, altura_tela, largura_tela)
             tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
