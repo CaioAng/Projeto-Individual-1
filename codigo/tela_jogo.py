@@ -126,6 +126,7 @@ def move_gosma(estado, tecla): #essa é a funcao que move os monstros do tipo go
                     posfutura.append(posmonstros2)
                 if posfutura not in estado["paredes"]:
                     monstros["posicao"] = posfutura
+                
 
 def atualiza_estado(estado, tecla): # funcao que atualiza o estado do jogo
     move_gosma(estado, tecla)

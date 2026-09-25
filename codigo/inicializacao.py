@@ -125,4 +125,5 @@ def inicializa_estado():
         "paredessecreta": gera_paredessecreta(),
         'mensagem': '',  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
         "monstros": monstros,
+        
     }

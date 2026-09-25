@@ -107,8 +107,8 @@ def move_jogador(estado, tecla): #funcao feita para que a funcao def atualiza es
 
 def atualiza_estado(estado, tecla):
     move_jogador(estado, tecla)
-    # colisoes(estado)
-    move_gosma(estado, tecla)
+    # colisoes(estado) MUDAR ESSA COISA OU NAO COLOCAR MONSTROS NA SALA SECRETA
+    # move_gosma(estado, tecla) MUDAR ESSA COISA, OU NAO COLOCAR MONSTROS NA SALA SECRETA
     portal = [[1,6],[2,6],[3,6]]
     if estado["pos_jogadorsecreta"] in portal:
             estado["tela_atual"] = TELA_JOGO
