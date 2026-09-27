@@ -48,23 +48,38 @@ def desenha_tela(janela, estado, altura_tela, largura_tela): #desenha toda a tel
     desenha_parede(janela, estado, altura_tela, largura_tela)
     motor.desenha_string(janela, 0+ deltax, deltay+len(mapa), estado["mensagem"], PRETO, BRANCO)
     desenha_portal(janela, estado, altura_tela, largura_tela)
+    motor.desenha_string(janela, len(mapa[0]) + deltax -13, deltay-1, f"nivel:{estado["nivel"]}  xp:{estado["xp"]}", PRETO, BRANCO)
 
 def executa_batalha(estado, monstro): #essa funcao executa a batalha entre o jogador e o monstro quando eles se encontram, ela é chamada em move jogador
+    if estado["jabateu"]:
+        return False
+    estado["jabateu"] = True
+    #transforma os simbolos das constantes em nomes dos monstros
+    nomes_monstros = {
+        GOSMA: "gosma",
+        ZUMBI: "zumbi",
+        ESQUELETO: "esqueleto",
+        # DRAGAO: "dragao"
+    }
+    nome = nomes_monstros[monstro["tipo"]]
     probmonstro = monstro["probatk"] * 100
     sorteio = random.randint(1,100)
     if sorteio <= probmonstro:
         estado['vidas'] -= 1
-        estado["mensagem"] = f"o monstro {monstro["tipo"]} gosma te atacou"
+        estado["mensagem"] = f"o monstro {nome} te atacou"
         if estado["vidas"] <= 0:
             #jogador morre e vai pra tela de fim de jogo
             estado["vidas"] = 5
             estado["tela_atual"] = TELA_GAMEOVER
     else:
         monstro["vida"] -= 1
-        estado["mensagem"] = f"voce atacou o monstro {monstro["tipo"]}"
+        estado["mensagem"] = f"voce atacou o monstro {nome}"
         if monstro["vida"] <= 0:
             estado['monstros'].remove(monstro)
-            estado["mensagem"] = f"voce matou o monstro {monstro["tipo"]}"
+            quantixp = monstro["xp"]
+            ganha_xp(estado, quantixp)
+            if "SUBIU DE NIVEL" not in estado["mensagem"]:
+                estado["mensagem"] = f"voce matou o monstro {nome} e ganhou {quantixp} de xp"
             return True
     return False
     
@@ -90,7 +105,6 @@ def move_jogador(estado, tecla): #funcao feita para que a funcao def atualiza es
             estado["pos_jogador"] = posicaofut
     elif posicaofut not in estado["paredes"]:
         estado["pos_jogador"] = posicaofut
-        estado['mensagem'] = ''
     else:
         estado["mensagem"] = "encontrou obstaculo"
     
@@ -126,13 +140,94 @@ def move_gosma(estado, tecla): #essa é a funcao que move os monstros do tipo go
                     posfutura.append(posmonstros2)
                 if posfutura not in estado["paredes"]:
                     monstros["posicao"] = posfutura
-                
+
+def move_zumbi(estado, tecla):# move o zumbi
+    for monstros in estado["monstros"]:
+        posfutura =[]
+        if monstros["tipo"] == ZUMBI:
+            if tecla == "CIMA" or tecla == "BAIXO" or tecla == "ESQUERDA" or tecla == "DIREITA":
+                jogx = estado["pos_jogador"][0]
+                jogy = estado["pos_jogador"][1]
+                posx = monstros["posicao"][0]
+                posy = monstros["posicao"][1]
+                #verifica as distancias horizontal e vertical
+                diferencax = jogx-posx 
+                diferencay = jogy-posy
+                distanciax = abs(jogx-posx) 
+                distanciay = abs(jogy-posy)
+                if abs(jogx-posx) + abs(jogy-posy) <= 5:#zumbi se mexe s e o jogador estiver ate a 5 casas de distancia
+                    if distanciax > distanciay:
+                        #esta mais longe na horizontal
+                        if diferencax > 0:
+                            dx = 1 # jogador esta para a direita, monstro anda 1 pra direita
+                        else:
+                            dx = -1 #jogador esta para a esquerda...
+                        dy = 0
+                    else: 
+                        #esta mais longe na horizontal
+                        if diferencay > 0:
+                            dy = 1 # jogador esta para baixo
+                        else:
+                            dy = -1 #monstro vai pra baixo
+                        dx = 0
+                    posfutura = [posx + dx, posy + dy]
+                    if posfutura == estado["pos_jogador"]:
+                        executa_batalha(estado, monstros) 
+                    elif posfutura not in estado["paredes"]:
+                        monstros["posicao"] = posfutura
+
+def move_esqueleto(estado, tecla):# move o esqueleto
+    for monstros in estado["monstros"]:
+        posfutura =[]
+        if monstros["tipo"] == ESQUELETO:
+            if tecla == "CIMA" or tecla == "BAIXO" or tecla == "ESQUERDA" or tecla == "DIREITA":
+                jogx = estado["pos_jogador"][0]
+                jogy = estado["pos_jogador"][1]
+                posx = monstros["posicao"][0]
+                posy = monstros["posicao"][1]
+                #verifica as distancias horizontal e vertical
+                diferencax = jogx-posx 
+                diferencay = jogy-posy
+                distanciax = abs(jogx-posx) 
+                distanciay = abs(jogy-posy)
+                if distanciax > distanciay:
+                    #esta mais longe na horizontal
+                    if diferencax > 0:
+                        dx = 1 # jogador esta para a direita, monstro anda 1 pra direita
+                    else:
+                        dx = -1 #jogador esta para a esquerda...
+                    dy = 0
+                else: 
+                    #esta mais longe na horizontal
+                    if diferencay > 0:
+                        dy = 1 # jogador esta para baixo
+                    else:
+                        dy = -1 #monstro vai pra baixo
+                    dx = 0
+                posfutura = [posx + dx, posy + dy]
+                if posfutura == estado["pos_jogador"]:
+                    executa_batalha(estado, monstros) 
+                elif posfutura not in estado["paredes"]:
+                    monstros["posicao"] = posfutura
+
+def ganha_xp(estado, quantidade):
+    estado["xp"] += quantidade
+    while estado["xp"] >= estado["xp_proximo_nivel"]:
+        estado["xp"] -= estado["xp_proximo_nivel"]  # Consome o XP do nível atual
+        estado["nivel"] += 1                        # Aumenta o nível
+        estado["max_vidas"] += 1                    # Aumenta +1 na vida máxima
+        estado["vidas"] = estado["max_vidas"]
+        estado["xp_proximo_nivel"] = 5 * estado["nivel"]
+        estado["mensagem"] = f"SUBIU DE NIVEL E GANHOU UMA VIDA! esta no nivel {estado["nivel"]}!"
+    
 
 def atualiza_estado(estado, tecla): # funcao que atualiza o estado do jogo
+    estado["jabateu"] = False
     move_gosma(estado, tecla)
+    move_zumbi(estado, tecla)
+    move_esqueleto(estado,tecla)
     move_jogador(estado, tecla)
     colisoes(estado)
-
     
     portal = [[1,10],[1,11],[1,9]]
     if estado["pos_jogador"] in portal:

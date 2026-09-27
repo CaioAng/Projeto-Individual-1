@@ -38,3 +38,5 @@ ESPINHO = '#'
 MONSTRO = '☠'
 PAREDE = '▣'
 GOSMA = "●"
+ZUMBI = "▼"
+ESQUELETO = "⬢"

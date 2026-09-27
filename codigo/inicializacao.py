@@ -27,7 +27,7 @@ def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocup
 
     return objetos
 
-def gera_monstros(quantidade, tipo, cor, vida, probatk, largura_mapa, altura_mapa, posicoes_ocupadas): #essa funcao é uma replica da gera objetos com informacoes a mais, vida e probabilidade de ataque
+def gera_monstros(quantidade, tipo, cor, vida, probatk, xp, largura_mapa, altura_mapa, posicoes_ocupadas): #essa funcao é uma replica da gera objetos com informacoes a mais, vida e probabilidade de ataque
     monstros = []
 
     for i in range(quantidade):
@@ -37,7 +37,8 @@ def gera_monstros(quantidade, tipo, cor, vida, probatk, largura_mapa, altura_map
             'posicao': posicao,
             'cor': cor,
             "vida": vida,
-            "probatk": probatk
+            "probatk": probatk,
+            "xp": xp
         })
 
     return monstros
@@ -107,11 +108,13 @@ def inicializa_estado():
     # Cria outros objetos do mapa
     posicoes_ocupadas = [pos_jogador]
     objetos = []
-    objetos += gera_objetos(8, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
-    objetos += gera_objetos(6, ESPINHO, MARROM_ESCURO, largura_mapa, altura_mapa, posicoes_ocupadas)
+    objetos += gera_objetos(11, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
+    objetos += gera_objetos(12, ESPINHO, MARROM_ESCURO, largura_mapa, altura_mapa, posicoes_ocupadas)
 
     monstros = []
-    monstros += gera_monstros(6, GOSMA, VERDE_CLARO, 2, 0.2, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(12, GOSMA, VERDE_CLARO, 2, 0.1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(8, ZUMBI, VERDE_ESCURO, 5, 0.4, 5, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(6, ESQUELETO, BRANCO, 3, 0.2, 3, largura_mapa, altura_mapa, posicoes_ocupadas)
     
     return {
         'tela_atual': TELA_INICIO,
@@ -125,5 +128,8 @@ def inicializa_estado():
         "paredessecreta": gera_paredessecreta(),
         'mensagem': '',  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
         "monstros": monstros,
-        
+        "jabateu": False,
+        "xp": 0,
+        "nivel": 1,
+        "xp_proximo_nivel": 5
     }
