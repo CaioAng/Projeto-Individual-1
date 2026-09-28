@@ -118,9 +118,9 @@ def inicializa_estado():
     dragao[0]["posicao"] = [26, 4]
 
     monstros = []
-    monstros += gera_monstros(12, GOSMA, VERDE_CLARO, 2, 0.1, 1, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
-    monstros += gera_monstros(8, ZUMBI, VERDE_ESCURO, 5, 0.4, 5, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
-    monstros += gera_monstros(6, ESQUELETO, BRANCO, 3, 0.2, 3, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(8, GOSMA, VERDE_CLARO, 2, 0.1, 1, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(12, ZUMBI, VERDE_ESCURO, 5, 0.4, 5, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(8, ESQUELETO, BRANCO, 3, 0.2, 3, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
     monstros += dragao
     
     return {

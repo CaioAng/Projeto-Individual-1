@@ -69,12 +69,7 @@ def executa_batalha(estado, monstro): #essa funcao executa a batalha entre o jog
         return False
     estado["jabateu"] = True
     #transforma os simbolos das constantes em nomes dos monstros
-    nomes_monstros = {
-        GOSMA: "gosma",
-        ZUMBI: "zumbi",
-        ESQUELETO: "esqueleto",
-        DRAGAO: "dragao"
-    }
+    nomes_monstros = {GOSMA: "gosma",ZUMBI: "zumbi",ESQUELETO: "esqueleto", DRAGAO: "dragao"}
     nome = nomes_monstros[monstro["tipo"]]
     probmonstro = monstro["probatk"] * 100
     sorteio = random.randint(1,100)
@@ -110,9 +105,18 @@ def move_jogador(estado, tecla): #funcao feita para que a funcao def atualiza es
 
     monstroencontrado = None #essa oarte vai verificar se a pessoa encontrou um monstro
     for monstros in estado["monstros"]:
-        if monstros['posicao'] == posicaofut:
-            monstroencontrado = monstros
-            break
+        # Se for o Dragão, testa o retângulo inteiro de 8x3
+        if monstros["tipo"] == DRAGAO:
+            x_base = monstros["posicao"][0]
+            y_base = monstros["posicao"][1]
+            if x_base <= posicaofut[0] < x_base + monstros["largura"] and y_base <= posicaofut[1] < y_base + monstros["altura"]:
+                monstroencontrado = monstros
+                break
+        # Se forem os outros monstros (1x1)
+        else:
+            if monstros["posicao"] == posicaofut:
+                monstroencontrado = monstros
+                break
     if monstroencontrado:
         monstromorreu = executa_batalha(estado, monstros)
         if monstromorreu:
@@ -258,7 +262,6 @@ def move_dragao(estado, tecla): #essa é a funcao que move os monstros do tipo g
                 if podemover:
                     monstros["posicao"] = posfutura
     
-
 def atualiza_estado(estado, tecla): # funcao que atualiza o estado do jogo
     estado["jabateu"] = False
     move_gosma(estado, tecla)
