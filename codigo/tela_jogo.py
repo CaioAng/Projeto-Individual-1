@@ -32,6 +32,21 @@ def desenha_portal(janela, estado, altura_tela, largura_tela): #desenha o portal
     motor.desenha_string(janela, 1 + deltax, deltay + 9, "░", ROXO2, ROXO)
     motor.desenha_string(janela, 1 + deltax, deltay + 11, "░", ROXO2, ROXO)
 
+def desenha_monstro(janela, estado, altura_tela, largura_tela):
+    mapa = estado["mapa"]
+    deltax = (largura_tela - len(mapa[0]))//2
+    deltay = (altura_tela - len(mapa))//2
+    for monstros in estado["monstros"]:
+        if monstros["tipo"] != DRAGAO:
+            motor.desenha_string(janela, monstros["posicao"][0] + deltax, monstros["posicao"][1]+ deltay, monstros["tipo"], CINZA_MEDIO_AZULADO, monstros["cor"])
+        else:
+            desenho = DRAGAO
+            for linha in range(monstros["altura"]):
+                for coluna in range(monstros["largura"]):
+                    pixel = desenho[linha][coluna]
+                    if pixel != " ":
+                        motor.desenha_string(janela, monstros["posicao"][0] + deltax + coluna, linha + monstros["posicao"][1]+ deltay, pixel, CINZA_MEDIO_AZULADO, monstros["cor"])
+
 def desenha_tela(janela, estado, altura_tela, largura_tela): #desenha toda a tela, chama as outras funcoes de desenho deste arquico
     motor.preenche_fundo(janela, PRETO)
     mapa = estado["mapa"]
@@ -41,8 +56,7 @@ def desenha_tela(janela, estado, altura_tela, largura_tela): #desenha toda a tel
     motor.desenha_string(janela, estado["pos_jogador"][0] + deltax, estado["pos_jogador"][1]+ deltay, JOGADOR, CINZA_ESCURO_AZULADO, BRANCO)
     for objeto in estado["objetos"]:
         motor.desenha_string(janela, objeto["posicao"][0] + deltax, objeto["posicao"][1]+ deltay, objeto["tipo"], CINZA_MEDIO_AZULADO, objeto["cor"])  
-    for monstros in estado["monstros"]:
-        motor.desenha_string(janela, monstros["posicao"][0] + deltax, monstros["posicao"][1]+ deltay, monstros["tipo"], CINZA_MEDIO_AZULADO, monstros["cor"])
+    desenha_monstro(janela, estado, altura_tela, largura_tela)
     motor.desenha_string(janela, 0+ deltax, deltay-1, estado["max_vidas"]*'🤍', PRETO, BRANCO)
     motor.desenha_string(janela, 0+ deltax, deltay-1, estado["vidas"]*'🧡', PRETO, VERMELHO)
     desenha_parede(janela, estado, altura_tela, largura_tela)
@@ -59,7 +73,7 @@ def executa_batalha(estado, monstro): #essa funcao executa a batalha entre o jog
         GOSMA: "gosma",
         ZUMBI: "zumbi",
         ESQUELETO: "esqueleto",
-        # DRAGAO: "dragao"
+        DRAGAO: "dragao"
     }
     nome = nomes_monstros[monstro["tipo"]]
     probmonstro = monstro["probatk"] * 100
@@ -219,6 +233,30 @@ def ganha_xp(estado, quantidade):
         estado["vidas"] = estado["max_vidas"]
         estado["xp_proximo_nivel"] = 5 * estado["nivel"]
         estado["mensagem"] = f"SUBIU DE NIVEL E GANHOU UMA VIDA! esta no nivel {estado["nivel"]}!"
+
+def move_dragao(estado, tecla): #essa é a funcao que move os monstros do tipo gosma no jogo
+    for monstros in estado["monstros"]:
+        posfutura = []
+        if monstros["tipo"] == DRAGAO:
+            if tecla == "CIMA" or tecla == "BAIXO" or tecla == "ESQUERDA" or tecla == "DIREITA":
+                x = random.randint(0,1)
+                if x == 0:
+                    posmonstros2 = monstros["posicao"][0] + random.randint(-1, 1)
+                    posfutura.append(posmonstros2)
+                    posfutura.append(monstros["posicao"][1])
+                else:
+                    posmonstros2 = monstros["posicao"][1] + random.randint(-1, 1)
+                    posfutura.append(monstros["posicao"][0])
+                    posfutura.append(posmonstros2)
+                podemover = True
+                for linha in range(monstros["altura"]): #esse negocio checa cada caractere um por vez se ele bate na aprede
+                    for coluna in range(monstros["largura"]):
+                        bloco = posfutura[0] + coluna, posfutura[1] + linha
+                        if bloco in estado["paredes"] or list(bloco) in estado["paredes"]:
+                            podemover = False
+                            break
+                if podemover:
+                    monstros["posicao"] = posfutura
     
 
 def atualiza_estado(estado, tecla): # funcao que atualiza o estado do jogo
@@ -226,6 +264,7 @@ def atualiza_estado(estado, tecla): # funcao que atualiza o estado do jogo
     move_gosma(estado, tecla)
     move_zumbi(estado, tecla)
     move_esqueleto(estado,tecla)
+    move_dragao(estado,tecla)
     move_jogador(estado, tecla)
     colisoes(estado)
     

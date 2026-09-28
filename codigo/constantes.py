@@ -40,3 +40,8 @@ PAREDE = '▣'
 GOSMA = "●"
 ZUMBI = "▼"
 ESQUELETO = "⬢"
+DRAGAO = (
+    r" /^\/^\ ",#r de raw string 
+    r"<-o--o->",
+    r" \_^^_/ "
+)

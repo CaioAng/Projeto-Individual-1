@@ -27,7 +27,7 @@ def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocup
 
     return objetos
 
-def gera_monstros(quantidade, tipo, cor, vida, probatk, xp, largura_mapa, altura_mapa, posicoes_ocupadas): #essa funcao é uma replica da gera objetos com informacoes a mais, vida e probabilidade de ataque
+def gera_monstros(quantidade, tipo, cor, vida, probatk, xp, largura, altura, largura_mapa, altura_mapa, posicoes_ocupadas): #essa funcao é uma replica da gera objetos com informacoes a mais, vida e probabilidade de ataque
     monstros = []
 
     for i in range(quantidade):
@@ -38,7 +38,9 @@ def gera_monstros(quantidade, tipo, cor, vida, probatk, xp, largura_mapa, altura
             'cor': cor,
             "vida": vida,
             "probatk": probatk,
-            "xp": xp
+            "xp": xp,
+            "largura": largura,
+            "altura": altura
         })
 
     return monstros
@@ -101,6 +103,7 @@ def inicializa_estado():
     
     largura_mapa = len(mapa[0])
     altura_mapa = len(mapa)
+
     
     # Você pode colocar o jogador em outro lugar, se preferir
     pos_jogador = [largura_mapa//2, altura_mapa//2]  # Meio do mapa
@@ -111,10 +114,14 @@ def inicializa_estado():
     objetos += gera_objetos(11, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
     objetos += gera_objetos(12, ESPINHO, MARROM_ESCURO, largura_mapa, altura_mapa, posicoes_ocupadas)
 
+    dragao = gera_monstros(1, DRAGAO, VERMELHO, 20, 0.6, 30, 8, 3, largura_mapa, altura_mapa, posicoes_ocupadas)
+    dragao[0]["posicao"] = [26, 4]
+
     monstros = []
-    monstros += gera_monstros(12, GOSMA, VERDE_CLARO, 2, 0.1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
-    monstros += gera_monstros(8, ZUMBI, VERDE_ESCURO, 5, 0.4, 5, largura_mapa, altura_mapa, posicoes_ocupadas)
-    monstros += gera_monstros(6, ESQUELETO, BRANCO, 3, 0.2, 3, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(12, GOSMA, VERDE_CLARO, 2, 0.1, 1, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(8, ZUMBI, VERDE_ESCURO, 5, 0.4, 5, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += gera_monstros(6, ESQUELETO, BRANCO, 3, 0.2, 3, 1, 1, largura_mapa, altura_mapa, posicoes_ocupadas)
+    monstros += dragao
     
     return {
         'tela_atual': TELA_INICIO,
