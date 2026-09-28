@@ -64,3 +64,5 @@ No nível básico você deve entender o código fornecido e implementar as segui
 - [ ] Funcionalidade 9: Monstro cobrinha;
 - [X] Funcionalidade 10: Telas adicionais;
 - [ ] Funcionalidade 11: [Sua sugestão validada por um professor - INDIQUE AQUI O NOME DO PROFESSOR QUE VALIDOU SUA IDEIA].
+
+link do video: https://youtu.be/Jt_vMW8Mbfw?feature=shared
